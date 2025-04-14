@@ -4,6 +4,8 @@ const PORT = 8000;
 const path = require("path");
 const useRoute = require("./routes/user");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const { checkForAuthenticationCookie } = require("./middleware/authentication");
 
 mongoose
   .connect("mongodb://localhost:27017/blogApp")
@@ -14,14 +16,17 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 // const Blog=require('./model/user')
-// app.get("/", async(req, res) => {
-//   const allBlogs
-//   res.render("home");
-// });
 
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/user", useRoute);
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"));
+app.get("/", (req, res) => {
+  res.render("home", {
+    user: req.user,
+  });
+});
 
 app.listen(PORT, () => console.log(`server started at ${PORT}`));
 
