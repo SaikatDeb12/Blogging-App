@@ -7,7 +7,11 @@
     <title>Blog App</title>
   </head>
   <body>
-    <%- include('./partials/nav.ejs') %> <%= JSON.stringify(user) %> <%-
-    include('./partials/scripts.ejs') %>
+    <%- include('./partials/nav.ejs') %> <% if (locals.user) { %>
+    <div>
+      <h2>User Info:</h2>
+      <pre><%= JSON.stringify(user, null, 2) %></pre>
+    </div>
+    <% } %> <%- include('./partials/scripts.ejs') %>
   </body>
 </html>

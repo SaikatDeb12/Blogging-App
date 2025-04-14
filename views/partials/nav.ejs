@@ -21,11 +21,25 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Create Account</a>
+          <a class="nav-link" href="/user/signup">Create Account</a>
+        </li>
+        <% if (locals.user) { %>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true"><%= "Saikat" %></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">SignIn</a>
+          <a class="nav-link" href="/user/logout" aria-disabled="true"
+            >LogOut</a
+          >
         </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signin" aria-disabled="true"
+            >SignIn</a
+          >
+        </li>
+
+        <%}%>
       </ul>
       <form class="d-flex" role="search">
         <input

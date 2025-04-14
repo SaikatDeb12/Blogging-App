@@ -37,4 +37,8 @@ router.post("/signup", async (req, res) => {
   return res.redirect("/");
 });
 
+router.get("/logout", (req, res) => {
+  res.cookie("token").render("home");
+});
+
 module.exports = router;
