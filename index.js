@@ -13,12 +13,11 @@ mongoose
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-const Blog=require('./model/user')
-app.get("/", async(req, res) => {
-  const allBlogs
-  res.render("home");
-});
-
+// const Blog=require('./model/user')
+// app.get("/", async(req, res) => {
+//   const allBlogs
+//   res.render("home");
+// });
 
 app.use(express.urlencoded({ extended: false }));
 

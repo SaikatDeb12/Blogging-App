@@ -10,12 +10,22 @@ router.get("/signup", (req, res) => {
   return res.render("signup");
 });
 
+router.get("/", (req, res) => {
+  return res.render("home");
+  // res.send("Welcome to home page");
+});
+
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.matchPasswordAndGenerateToken(email, password);
-  console.log("user", user);
-  return res.redirect("/");
-  // return res.status(200).json({ msg: "user logged in" });
+  try {
+    const token = await User.matchPasswordAndGenerateToken(email, password);
+    console.log("user", token);
+    return res.cookie("token", token).redirect("/");
+  } catch (err) {
+    return res.render("signin", {
+      error: "Invalid email or passsword",
+    });
+  }
 });
 
 router.post("/signup", async (req, res) => {
