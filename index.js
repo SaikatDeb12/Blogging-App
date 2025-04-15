@@ -3,6 +3,7 @@ const app = express();
 const PORT = 8000;
 const path = require("path");
 const useRoute = require("./routes/user");
+const blogRoute = require("./routes/blog");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const { checkForAuthenticationCookie } = require("./middleware/authentication");
@@ -20,6 +21,8 @@ app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/user", useRoute);
+app.use("/blog", blogRoute);
+
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 app.get("/", (req, res) => {
