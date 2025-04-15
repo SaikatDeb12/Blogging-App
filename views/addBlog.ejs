@@ -9,7 +9,7 @@
   <body>
     <%- include('./partials/nav.ejs') %>
     <div class="container mt-3">
-      <form method="POST" action="/blog">
+      <form method="POST" action="/blog" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="coverImg" class="form-image">Cover Image</label>
           <input
