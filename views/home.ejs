@@ -10,8 +10,20 @@
     <%- include('./partials/nav.ejs') %> <% if (locals.user) { %>
     <div>
       <h2>User Info:</h2>
-      <pre><%= JSON.stringify(user, null, 2) %></pre>
-      <pre><%= JSON.stringify(blogs) %></pre>
+      <div class="container mt-3">
+        <% blogs.forEach(blog=> { %>
+        <div class="card" style="width: 18rem">
+          <img src="<%= blog.coverImgURL %>" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title %></h5>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <%- include('./partials/scripts.ejs') %>
+      <!-- <pre><%= JSON.stringify(user, null, 2) %></pre>
+      <pre><%= JSON.stringify(blogs) %></pre> -->
     </div>
     <% } %> <%- include('./partials/scripts.ejs') %>
   </body>
