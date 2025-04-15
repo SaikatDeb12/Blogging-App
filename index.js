@@ -16,7 +16,7 @@ mongoose
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-// const Blog=require('./model/user')
+const Blog = require("./model/blog");
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -25,9 +25,11 @@ app.use("/blog", blogRoute);
 
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  const allBlogs = await Blog.find({}).sort();
   res.render("home", {
     user: req.user,
+    blogs: allBlogs,
   });
 });
 
