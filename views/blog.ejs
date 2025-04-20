@@ -14,8 +14,9 @@
       <p><%= blog.body %></p>
     </div>
     <div class="container mt-3">
+      <% if (locals.user) { %>
       <h2>Comment</h2>
-      <form method="POST" action="/user/signin">
+      <form method="POST" action="/blog/comment/<%= blog._id %>">
         <div class="mb-3">
           <input
             name="content"
@@ -26,6 +27,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+      <% } %>
     </div>
 
     <%- include('./partials/scripts.ejs') %>

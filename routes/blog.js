@@ -34,11 +34,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/comment/:blogId", async (req, res) => {
   await commentModel.create({
-    content: req.body,
-    id: req.params.blogId,
+    content: req.body.content,
+    blogId: req.params.blogId,
     createdBy: req.user._id,
   });
-  return res.render(`/blog/${req.params.blogId}`);
+  return res.redirect(`/blog/${req.params.blogId}`);
 });
 
 router.post("/", upload.single("coverImage"), async (req, res) => {
