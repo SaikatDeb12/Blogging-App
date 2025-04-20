@@ -10,13 +10,18 @@
     <%- include('./partials/nav.ejs') %> <% if (locals.user) { %>
     <div>
       <h2>User Info:</h2>
-      <div class="container mt-3">
+      <div class="container mt-3 row row-cols-2">
         <% blogs.forEach(blog=> { %>
-        <div class="card m-3" style="width: 18rem">
-          <img src="<%= blog.coverImgURL %>" class="card-img-top" alt="..." />
+        <div class="card m-3" style="width: 15rem">
+          <img
+            src="<%= blog.coverImgURL %>"
+            class="card-img-top"
+            style="height: 15rem; width: 100%"
+            alt="..."
+          />
           <div class="card-body">
             <h5 class="card-title"><%= blog.title %></h5>
-            <a href="<%= blog._id %>" class="btn btn-primary">View</a>
+            <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
           </div>
         </div>
         <% }) %>
