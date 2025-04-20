@@ -13,6 +13,21 @@
       <img src="/<%= blog.coverImgURL %>" width="300px" height="300px" />
       <p><%= blog.body %></p>
     </div>
+    <div class="container mt-3">
+      <h2>Comment</h2>
+      <form method="POST" action="/user/signin">
+        <div class="mb-3">
+          <input
+            name="content"
+            type="text"
+            class="form-control"
+            placeholder="Enter your comment"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
     <%- include('./partials/scripts.ejs') %>
   </body>
 </html>

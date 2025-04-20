@@ -7,6 +7,7 @@ const blogRoute = require("./routes/blog");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const { checkForAuthenticationCookie } = require("./middleware/authentication");
+const Blog = require("./model/blog");
 
 mongoose
   .connect("mongodb://localhost:27017/blogApp")
@@ -16,13 +17,12 @@ mongoose
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-const Blog = require("./model/blog");
-
+app.use(cookieParser());
+// the middleware checkForAuthenticationCookie needs to access the cookie before parsing
+app.use(checkForAuthenticationCookie("token"));
 app.use(express.urlencoded({ extended: false }));
 app.use("/user", useRoute);
 app.use("/blog", blogRoute);
-app.use(cookieParser());
-app.use(checkForAuthenticationCookie("token"));
 app.use(express.static(path.resolve("./public"))); //to load static images
 
 app.get("/", async (req, res) => {

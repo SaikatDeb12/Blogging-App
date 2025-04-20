@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const multer = require("multer");
 const Blog = require("../model/blog");
+const commentModel = require("../model/comment");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(
@@ -19,7 +20,7 @@ const upload = multer({ storage: storage });
 
 router.get("/add-blog", (req, res) => {
   return res.render("addBlog", {
-    user: res.user,
+    user: req.user,
   });
 });
 
@@ -29,6 +30,15 @@ router.get("/:id", async (req, res) => {
     user: req.user,
     blog: blog,
   });
+});
+
+router.post("/comment/:blogId", async (req, res) => {
+  await commentModel.create({
+    content: req.body,
+    id: req.params.blogId,
+    createdBy: req.user._id,
+  });
+  return res.render(`/blog/${req.params.blogId}`);
 });
 
 router.post("/", upload.single("coverImage"), async (req, res) => {
